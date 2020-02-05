@@ -1,3 +1,3 @@
-app.initializers.add('askvortsov/saml-sso', () => {
-  console.log('[askvortsov/saml-sso] Hello, admin!');
+app.initializers.add('askvortsov/flarum-saml-sso', () => {
+  console.log('[askvortsov/flarum-saml-sso] Hello, admin!');
 });

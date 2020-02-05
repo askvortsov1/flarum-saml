@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of askvortsov/saml-sso.
+ * This file is part of askvortsov/flarum-saml-sso.
  *
  * Copyright (c) 2020 Alexander Skvortsov.
  *
