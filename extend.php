@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of askvortsov/flarum-saml-sso.
+ * This file is part of askvortsov/flarum-saml.
  *
  * Copyright (c) 2020 Alexander Skvortsov.
  *
@@ -12,13 +12,16 @@
 namespace Askvortsov\FlarumSAML;
 
 use Flarum\Extend;
+use FoF\Components\Extend\AddFofComponents;
 
 return [
+    new AddFofComponents(),
     (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/resources/less/forum.less'),
+        ->js(__DIR__ . '/js/dist/forum.js')
+        ->css(__DIR__ . '/resources/less/forum.less'),
     (new Extend\Frontend('admin'))
-        ->js(__DIR__.'/js/dist/admin.js')
-        ->css(__DIR__.'/resources/less/admin.less'),
-    new Extend\Locales(__DIR__ . '/resources/locale')
+        ->js(__DIR__ . '/js/dist/admin.js')
+        ->css(__DIR__ . '/resources/less/admin.less'),
+    new Extend\Locales(__DIR__ . '/resources/locale'),
+    (new Settings\Settings())
 ];

@@ -1,5 +1,5 @@
 {
-    "name": "@askvortsov/flarum-saml-sso",
+    "name": "@askvortsov/flarum-saml",
     "version": "0.0.0",
     "private": true,
     "dependencies": {
