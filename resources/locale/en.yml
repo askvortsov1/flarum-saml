@@ -4,9 +4,7 @@ askvortsov-saml:
     labels:
       # Gen Config
       mode: SAML2 SSO Enabled?
-      sp_name: Service Provider Name (Flarum)
       # IdP Info
-      idp_entity_id: Identity Provider Entity ID
       idp_metadata: Identity Provider XML Metadata
       # Group Management
       manage_groups: Enable Group Provisioning?

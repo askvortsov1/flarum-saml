@@ -137,15 +137,8 @@ app.initializers.add('askvortsov/saml', function () {
         key: "askvortsov-saml.mode",
         options: modeOptions,
         required: true
-      })], m(StringItem, {
-        key: "askvortsov-saml.sp_name",
-        required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.sp_name')), // IdP Config
+      })], // IdP Config
       m(StringItem, {
-        key: "askvortsov-saml.idp_endpoint",
-        type: "url",
-        required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.idp_entity_id')), m(StringItem, {
         key: "askvortsov-saml.idp_metadata",
         required: true
       }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')), // Group Management

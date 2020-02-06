@@ -20,13 +20,7 @@ app.initializers.add('askvortsov/saml', () => {
                         <label>{ app.translator.trans('askvortsov-saml.admin.labels.mode') }</label>,
                         <SelectItem key="askvortsov-saml.mode" options={modeOptions} required />,
                     ],
-                    <StringItem key="askvortsov-saml.sp_name" required>
-                        {app.translator.trans('askvortsov-saml.admin.labels.sp_name')}
-                    </StringItem>,
                     // IdP Config
-                    <StringItem key="askvortsov-saml.idp_endpoint" type="url" required>
-                        {app.translator.trans('askvortsov-saml.admin.labels.idp_entity_id')}
-                    </StringItem>,
                     <StringItem key="askvortsov-saml.idp_metadata" required>
                         {app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')}
                     </StringItem>,
