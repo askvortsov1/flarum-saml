@@ -8,3 +8,6 @@ askvortsov-saml:
       idp_metadata: Identity Provider XML Metadata
       # Group Management
       manage_groups: Enable Group Provisioning?
+  forum:
+    log_in:
+      with_saml_button: "SAML2 SSO"

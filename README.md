@@ -18,6 +18,10 @@ composer require askvortsov/flarum-saml
 composer update askvortsov/flarum-saml
 ```
 
+### TODO:
+
+- Add option for redirect or post binding. Right now this is set to REDIRECT, because POST doesn't work because CSRF exemption isn't yet available in Flarum.
+
 ### Links
 
 - [Packagist](https://packagist.org/packages/askvortsov/flarum-saml)
