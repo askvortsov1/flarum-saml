@@ -22,9 +22,9 @@ app.initializers.add('askvortsov/saml', () => {
                         {app.translator.trans('askvortsov-saml.admin.labels.only_option')}
                     </BooleanItem>,
                     // Group Management
-                    <BooleanItem key="askvortsov-saml.sync_attributes" required>
-                        {app.translator.trans('askvortsov-saml.admin.labels.sync_attributes')}
-                    </BooleanItem>,
+                    // <BooleanItem key="askvortsov-saml.sync_attributes" required>
+                    //     {app.translator.trans('askvortsov-saml.admin.labels.sync_attributes')}
+                    // </BooleanItem>,
 
                 ],
             })

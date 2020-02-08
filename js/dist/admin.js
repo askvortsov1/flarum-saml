@@ -130,11 +130,11 @@ app.initializers.add('askvortsov/saml', function () {
       m(BooleanItem, {
         key: "askvortsov-saml.only_option",
         required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.only_option')), // Group Management
-      m(BooleanItem, {
-        key: "askvortsov-saml.sync_attributes",
-        required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.sync_attributes'))]
+      }, app.translator.trans('askvortsov-saml.admin.labels.only_option')) // Group Management
+      // <BooleanItem key="askvortsov-saml.sync_attributes" required>
+      //     {app.translator.trans('askvortsov-saml.admin.labels.sync_attributes')}
+      // </BooleanItem>,
+      ]
     }));
   };
 });
