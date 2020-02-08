@@ -2,11 +2,9 @@ import { settings } from '@fof-components';
 
 const {
     SettingsModal,
-    items: { SelectItem, StringItem },
+    items: { BooleanItem, StringItem },
 } = settings;
 
-const modeOptions = { 'off': "Disabled", 'on': "Enabled Alongside Other Auth", 'strictOn': "Enabled, Only Auth Option" }
-const groupOptions = { 'off': "Disabled", 'on': "Enabled, Fail Gracefully", 'strictOn': "Enabled, Forced" }
 
 app.initializers.add('askvortsov/saml', () => {
     app.extensionSettings['askvortsov-saml'] = () =>
@@ -15,20 +13,18 @@ app.initializers.add('askvortsov/saml', () => {
                 title: app.translator.trans('askvortsov-saml.admin.title'),
                 type: 'small',
                 items: [
-                    // General Info
-                    [
-                        <label>{ app.translator.trans('askvortsov-saml.admin.labels.mode') }</label>,
-                        <SelectItem key="askvortsov-saml.mode" options={modeOptions} required />,
-                    ],
                     // IdP Config
                     <StringItem key="askvortsov-saml.idp_metadata" required>
                         {app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')}
                     </StringItem>,
+                    // General Info
+                    <BooleanItem key="askvortsov-saml.only_option" required>
+                        {app.translator.trans('askvortsov-saml.admin.labels.only_option')}
+                    </BooleanItem>,
                     // Group Management
-                    [
-                        <label>{app.translator.trans('askvortsov-saml.admin.labels.manage_groups')}</label>,
-                        <SelectItem key="askvortsov-saml.manage_groups" options={groupOptions} required />,
-                    ],
+                    <BooleanItem key="askvortsov-saml.sync_attributes" required>
+                        {app.translator.trans('askvortsov-saml.admin.labels.sync_attributes')}
+                    </BooleanItem>,
 
                 ],
             })

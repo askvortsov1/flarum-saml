@@ -115,38 +115,26 @@ __webpack_require__.r(__webpack_exports__);
 
 var SettingsModal = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].SettingsModal,
     _settings$items = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].items,
-    SelectItem = _settings$items.SelectItem,
+    BooleanItem = _settings$items.BooleanItem,
     StringItem = _settings$items.StringItem;
-var modeOptions = {
-  'off': "Disabled",
-  'on': "Enabled Alongside Other Auth",
-  'strictOn': "Enabled, Only Auth Option"
-};
-var groupOptions = {
-  'off': "Disabled",
-  'on': "Enabled, Fail Gracefully",
-  'strictOn': "Enabled, Forced"
-};
 app.initializers.add('askvortsov/saml', function () {
   app.extensionSettings['askvortsov-saml'] = function () {
     return app.modal.show(new SettingsModal({
       title: app.translator.trans('askvortsov-saml.admin.title'),
       type: 'small',
-      items: [// General Info
-      [m("label", null, app.translator.trans('askvortsov-saml.admin.labels.mode')), m(SelectItem, {
-        key: "askvortsov-saml.mode",
-        options: modeOptions,
-        required: true
-      })], // IdP Config
+      items: [// IdP Config
       m(StringItem, {
         key: "askvortsov-saml.idp_metadata",
         required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')), // Group Management
-      [m("label", null, app.translator.trans('askvortsov-saml.admin.labels.manage_groups')), m(SelectItem, {
-        key: "askvortsov-saml.manage_groups",
-        options: groupOptions,
+      }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')), // General Info
+      m(BooleanItem, {
+        key: "askvortsov-saml.only_option",
         required: true
-      })]]
+      }, app.translator.trans('askvortsov-saml.admin.labels.only_option')), // Group Management
+      m(BooleanItem, {
+        key: "askvortsov-saml.sync_attributes",
+        required: true
+      }, app.translator.trans('askvortsov-saml.admin.labels.sync_attributes'))]
     }));
   };
 });

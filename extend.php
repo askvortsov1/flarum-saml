@@ -23,13 +23,15 @@ return [
     new AddFofComponents(),
 
     (new Extend\Frontend('forum'))
-        ->js(__DIR__ . '/js/dist/forum.js'),
+        ->js(__DIR__ . '/js/dist/forum.js')
+        ->css(__DIR__ . '/resources/less/forum.less'),
 
     (new Extend\Frontend('admin'))
         ->js(__DIR__ . '/js/dist/admin.js'),
 
     function (Dispatcher $events) {
         $events->subscribe(Listener\CsrfExemptWorkaround::class);
+        $events->subscribe(Listener\AddSettings::class);
     },
 
     (new Extend\Routes('forum'))
