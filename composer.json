@@ -28,13 +28,13 @@
         "flarum-extension": {
             "title": "Flarum SAML2 SSO",
             "icon": {
-                "name": "fas fa-users",
+                "name": "fas fa-lock",
                 "backgroundColor": "#6932D1",
                 "color": "#fff"
             }
         },
         "flagrow": {
-            "discuss": ""
+            "discuss": "https://discuss.flarum.org/d/22757-flarum-saml"
         }
     }
 }
