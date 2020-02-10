@@ -57,7 +57,7 @@ class ACSController extends BaseSAMLController implements RequestHandlerInterfac
             }
         }
 
-        if ($this->extensions->isEnabled('askvortsov-auth-sync') && $this->settings . get('askvortsov-saml.sync_attributes', '')) {
+        if ($this->extensions->isEnabled('askvortsov-auth-sync') && $this->settings->get('askvortsov-saml.sync_attributes', '')) {
             $event = new AuthSyncEvent();
             $event->email=$email;
             $event->attributes = json_encode([
