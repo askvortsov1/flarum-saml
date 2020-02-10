@@ -29,7 +29,7 @@ Flarum SAML integrates with [Flarum Auth Sync](https://github.com/askvortsov1/fl
 Have your SAML Identity Provider include the following in attributes (make sure that keys are lowercase):
 
 - `avatar`: A URL pointing to an image for the user's avatar. Make sure that the file type is compatible with Flarum (jpeg or png I believe).
-- `group`: A comma-separated list of ids for groups that a user should belong to. Keep in mind that this will both add and remove groups, so make sure that all desired groups are included.
+- `groups`: A comma-separated list of ids for groups that a user should belong to. Keep in mind that this will both add and remove groups, so make sure that all desired groups are included.
 - `bio`: A string that will be synced to the user's bio if [Friends of Flarum User Bios](https://github.com/FriendsOfFlarum/user-bio) is enabled
 - For any masquerade attributes you want to sync, make sure that the SAML attribute key matches the name of the profile field.
 
