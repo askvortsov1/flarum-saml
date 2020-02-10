@@ -7,6 +7,7 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Forum\Auth\ResponseFactory;
 use OneLogin\Saml2\Auth;
 use OneLogin\Saml2\IdPMetadataParser;
+use Flarum\Extension\ExtensionManager;
 use OneLogin\Saml2\Constants;
 
 abstract class BaseSAMLController
@@ -26,10 +27,13 @@ abstract class BaseSAMLController
      */
     protected $response;
 
-    public function __construct(ResponseFactory $response, SettingsRepositoryInterface $settings, UrlGenerator $url)
+    protected $extensions;
+
+    public function __construct(ResponseFactory $response, SettingsRepositoryInterface $settings, ExtensionManager $extensions, UrlGenerator $url)
     {
         $this->response = $response;
         $this->settings = $settings;
+        $this->extensions = $extensions;
         $this->url = $url;
     }
 
