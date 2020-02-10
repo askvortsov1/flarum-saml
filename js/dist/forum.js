@@ -116,14 +116,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/SettingsPage */ "flarum/components/SettingsPage");
 /* harmony import */ var flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/LogInButtons */ "flarum/components/LogInButtons");
-/* harmony import */ var flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/components/LogInModal */ "flarum/components/LogInModal");
-/* harmony import */ var flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/components/SignUpModal */ "flarum/components/SignUpModal");
-/* harmony import */ var flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! flarum/components/LogInButton */ "flarum/components/LogInButton");
-/* harmony import */ var flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/SignUpModal */ "flarum/components/SignUpModal");
+/* harmony import */ var flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/components/LogInButton */ "flarum/components/LogInButton");
+/* harmony import */ var flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! flarum/components/LogInButtons */ "flarum/components/LogInButtons");
+/* harmony import */ var flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! flarum/components/LogInModal */ "flarum/components/LogInModal");
+/* harmony import */ var flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -132,9 +132,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/saml', function () {
-  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_4___default.a.prototype, 'body', dontShowLoginModalIfOnlySaml);
-  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_5___default.a.prototype, 'body', dontShowSignupModalIfOnlySaml);
-  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'items', addSamlLoginButton);
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_6___default.a.prototype, 'body', dontShowLoginModalIfOnlySaml);
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'body', dontShowSignupModalIfOnlySaml);
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5___default.a.prototype, 'items', addSamlLoginButton);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'accountItems', removeProfileActions);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'settingsItems', checkRemoveAccountSection);
 
@@ -142,7 +142,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml')) {
       return "See Popup to Login";
     } else {
-      return [m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_3___default.a, null), m("div", {
+      return [m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5___default.a, null), m("div", {
         className: "Form Form--centered"
       }, this.fields().toArray())];
     }
@@ -153,14 +153,14 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
       return "See Popup to Register";
     } else {
       console.log(this.props);
-      return [this.props.token ? '' : m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_3___default.a, null), m("div", {
+      return [this.props.token ? '' : m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5___default.a, null), m("div", {
         className: "Form Form--centered"
       }, this.fields().toArray())];
     }
   }
 
   function addSamlLoginButton(items) {
-    items.add('saml', m(flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
+    items.add('saml', m(flarum_components_LogInButton__WEBPACK_IMPORTED_MODULE_4___default.a, {
       className: "Button LogInButton--saml",
       icon: "fas fa-lock",
       path: "/auth/saml/login"

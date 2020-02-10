@@ -122,19 +122,16 @@ app.initializers.add('askvortsov/saml', function () {
     return app.modal.show(new SettingsModal({
       title: app.translator.trans('askvortsov-saml.admin.title'),
       type: 'small',
-      items: [// IdP Config
-      m(StringItem, {
+      items: [m(StringItem, {
         key: "askvortsov-saml.idp_metadata",
         required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')), // General Info
-      m(BooleanItem, {
+      }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')), m(BooleanItem, {
         key: "askvortsov-saml.only_option",
         required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.only_option')) // Group Management
-      // <BooleanItem key="askvortsov-saml.sync_attributes" required>
-      //     {app.translator.trans('askvortsov-saml.admin.labels.sync_attributes')}
-      // </BooleanItem>,
-      ]
+      }, app.translator.trans('askvortsov-saml.admin.labels.only_option')), m(BooleanItem, {
+        key: "askvortsov-saml.sync_attributes",
+        required: true
+      }, app.translator.trans('askvortsov-saml.admin.labels.sync_attributes'))]
     }));
   };
 });
