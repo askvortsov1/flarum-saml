@@ -4,7 +4,7 @@ askvortsov-saml:
     labels:
       idp_metadata: Identity Provider Metadata XML
       only_option: Use SAML2 SSO as only login option?
-      sync_attributes: Sync Attributes? Requires askvortsov/auth-sync extension.
+      sync_attributes: Sync Attributes (Avatar, Groups, Bio, and Profile)? Requires askvortsov/auth-sync extension.
   forum:
     log_in:
       with_saml_button: "SAML2 SSO"
