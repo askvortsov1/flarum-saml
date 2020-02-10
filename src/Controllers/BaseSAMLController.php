@@ -2,13 +2,12 @@
 
 namespace Askvortsov\FlarumSAML\Controllers;
 
+use Flarum\Extension\ExtensionManager;
+use Flarum\Forum\Auth\ResponseFactory;
 use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Flarum\Forum\Auth\ResponseFactory;
 use OneLogin\Saml2\Auth;
 use OneLogin\Saml2\IdPMetadataParser;
-use Flarum\Extension\ExtensionManager;
-use OneLogin\Saml2\Constants;
 
 abstract class BaseSAMLController
 {
@@ -65,7 +64,6 @@ abstract class BaseSAMLController
             'NameIDFormat'             => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
         ];
         $settings['security'] = [
-            #'AuthnRequestsSigned' => true,
             'wantMessagesSigned' => true,
             'wantAssertionsSigned' => true,
         ];

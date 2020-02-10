@@ -2,9 +2,9 @@
 
 namespace Askvortsov\FlarumSAML\Listener;
 
-use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddSettings

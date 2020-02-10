@@ -1,10 +1,10 @@
 import { extend, override } from 'flarum/extend';
 import app from 'flarum/app';
 import SettingsPage from "flarum/components/SettingsPage";
-import LogInButtons from 'flarum/components/LogInButtons';
-import LogInModal from "flarum/components/LogInModal";
 import SignUpModal from "flarum/components/SignUpModal";
 import LogInButton from 'flarum/components/LogInButton';
+import LogInButtons from 'flarum/components/LogInButtons';
+import LogInModal from "flarum/components/LogInModal";
 
 app.initializers.add('askvortsov/saml', () => {
     override(LogInModal.prototype, 'body', dontShowLoginModalIfOnlySaml);

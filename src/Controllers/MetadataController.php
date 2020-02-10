@@ -5,9 +5,9 @@ namespace Askvortsov\FlarumSAML\Controllers;
 use Askvortsov\FlarumSAML\Controllers\BaseSAMLController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Zend\Diactoros\Response\XmlResponse;
-use Zend\Diactoros\Response\HtmlResponse;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\XmlResponse;
 
 
 class MetadataController extends BaseSAMLController implements RequestHandlerInterface

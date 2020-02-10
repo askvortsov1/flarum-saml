@@ -4,13 +4,13 @@ namespace Askvortsov\FlarumSAML\Controllers;
 
 use Askvortsov\FlarumSAML\Controllers\BaseSAMLController;
 use Askvortsov\FlarumAuthSync\Models\AuthSyncEvent;
+use Carbon\Carbon;
 use Flarum\Forum\Auth\Registration;
+use OneLogin\Saml2\Constants;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Zend\Diactoros\Response\HtmlResponse;
 use Psr\Http\Server\RequestHandlerInterface;
-use Carbon\Carbon;
-use OneLogin\Saml2\Constants;
+use Zend\Diactoros\Response\HtmlResponse;
 
 class ACSController extends BaseSAMLController implements RequestHandlerInterface
 {
