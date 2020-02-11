@@ -53,7 +53,7 @@ class ACSController extends BaseSAMLController implements RequestHandlerInterfac
         $masquerade_attributes = [];
         foreach($attributes as $key => $attribute) {
             if ($key != "avatar" && $key != "bio" && $key != "groups") {
-                $masquerade_attributes[] = $attribute[0];
+                $masquerade_attributes[$key] = $attribute;
             }
         }
 
