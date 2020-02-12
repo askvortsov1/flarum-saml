@@ -46,8 +46,15 @@ class ACSController extends BaseSAMLController implements RequestHandlerInterfac
         if ($is_email_auth) {
             $email = filter_var($saml->getNameId(), FILTER_VALIDATE_EMAIL);
         } else {
-            $email = filter_var($attributes['urn:oid:1.2.840.113549.1.9.1.1'][0], FILTER_VALIDATE_EMAIL);
+            $email = filter_var($attributes['urn:oid:1.2.840.113549.1.9.1.1'], FILTER_VALIDATE_EMAIL);
             unset($attributes['urn:oid:1.2.840.113549.1.9.1.1']);
+            if ( ! isset($email) ) {
+                $email = filter_var($attributes['email'], FILTER_VALIDATE_EMAIL);
+            }
+        }
+
+        if ( !isset($email) ) {
+            return new HtmlResponse("Email not provided.");
         }
 
         $masquerade_attributes = [];
