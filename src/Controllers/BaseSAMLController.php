@@ -61,7 +61,7 @@ abstract class BaseSAMLController
             'singleLogoutService'      => [
                 'url' => $this->url->to('forum')->route('askvortsov-saml.logout'),
             ],
-            'NameIDFormat'             => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
+            'NameIDFormat'             => $this->settings->get('askvortsov-saml.nameid_format', 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress'),
         ];
         $settings['security'] = [
             'wantMessagesSigned' => true,

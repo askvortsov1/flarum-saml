@@ -140,7 +140,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
 
   function dontShowLoginModalIfOnlySaml() {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml')) {
-      return "See Popup to Login";
+      return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_login');
     } else {
       return [m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5___default.a, null), m("div", {
         className: "Form Form--centered"
@@ -150,7 +150,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
 
   function dontShowSignupModalIfOnlySaml() {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml') && (jQuery.isEmptyObject(this.props) || this.props.username == "" && this.props.password == "")) {
-      return "See Popup to Register";
+      return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_register');
     } else {
       console.log(this.props);
       return [this.props.token ? '' : m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_5___default.a, null), m("div", {
@@ -181,14 +181,19 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
   }
 });
 $(function () {
-  $('.item-logIn>button').on("click", function (e) {
+  $('.item-logIn>button').add('.item-signUp>button').on("click", function (e) {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml')) {
-      window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no");
-    }
-  });
-  $('.item-signUp>button').on("click", function (e) {
-    if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml')) {
-      window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no");
+      var win = window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no");
+
+      if (win == null) {
+        win == window.open("/auth/saml/login", "_blank");
+      }
+
+      if (win == null) {
+        alert(flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.enable_popups'));
+      }
+
+      win.focus();
     }
   });
 });

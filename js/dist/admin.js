@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 var SettingsModal = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].SettingsModal,
     _settings$items = _fof_components__WEBPACK_IMPORTED_MODULE_0__["settings"].items,
     BooleanItem = _settings$items.BooleanItem,
+    SelectItem = _settings$items.SelectItem,
     StringItem = _settings$items.StringItem;
 app.initializers.add('askvortsov/saml', function () {
   app.extensionSettings['askvortsov-saml'] = function () {
@@ -131,7 +132,17 @@ app.initializers.add('askvortsov/saml', function () {
       }, app.translator.trans('askvortsov-saml.admin.labels.only_option')), m(BooleanItem, {
         key: "askvortsov-saml.sync_attributes",
         required: true
-      }, app.translator.trans('askvortsov-saml.admin.labels.sync_attributes'))]
+      }, app.translator.trans('askvortsov-saml.admin.labels.sync_attributes')), m("div", {
+        className: "Form-group"
+      }, m("label", null, app.translator.trans('askvortsov-saml.admin.labels.nameid_format')), SelectItem.component({
+        options: {
+          "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent": app.translator.trans('askvortsov-saml.admin.options.nameid_format.persistent'),
+          "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress": app.translator.trans('askvortsov-saml.admin.options.nameid_format.emailAddress'),
+          "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified": app.translator.trans('askvortsov-saml.admin.options.nameid_format.unspecified')
+        },
+        key: 'askvortsov-saml.nameid_format',
+        required: true
+      }))]
     }));
   };
 });

@@ -16,7 +16,7 @@ app.initializers.add('askvortsov/saml', () => {
 
     function dontShowLoginModalIfOnlySaml() {
         if (app.forum.attribute('onlyUseSaml')) {
-            return "See Popup to Login";
+            return app.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_login');
         } else {
             return [
                 <LogInButtons />,
@@ -30,7 +30,7 @@ app.initializers.add('askvortsov/saml', () => {
 
     function dontShowSignupModalIfOnlySaml() {
         if (app.forum.attribute('onlyUseSaml') && (jQuery.isEmptyObject(this.props) || this.props.username == "" && this.props.password == "")) {
-            return "See Popup to Register";
+            return app.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_register');
         } else {
             console.log(this.props);
             return [
@@ -67,14 +67,16 @@ app.initializers.add('askvortsov/saml', () => {
 });
 
 $(function () {
-    $('.item-logIn>button').on("click", function (e) {
+    $('.item-logIn>button').add('.item-signUp>button').on("click", function (e) {
         if (app.forum.attribute('onlyUseSaml')) {
-            window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no")
-        }
-    });
-    $('.item-signUp>button').on("click", function (e) {
-        if (app.forum.attribute('onlyUseSaml')) {
-            window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no")
+            var win = window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no")
+            if (win == null) {
+                win == window.open("/auth/saml/login", "_blank")
+            }
+            if (win == null) {
+                alert(app.translator.trans('askvortsov-saml.forum.log_in.enable_popups'))
+            }
+            win.focus();
         }
     });
 });
