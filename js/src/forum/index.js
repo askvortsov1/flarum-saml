@@ -31,7 +31,6 @@ app.initializers.add('askvortsov/saml', () => {
 
     function seePopupText() {
         return [
-            <p>{app.translator.trans('askvortsov-saml.forum.log_in.see_popup')}</p>,
             <a class="Button Button--primary" href="/auth/saml/login" target="_blank">{app.translator.trans('askvortsov-saml.forum.log_in.open_popup')}</a>
         ]
     }

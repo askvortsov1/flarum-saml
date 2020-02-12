@@ -158,7 +158,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
   }
 
   function seePopupText() {
-    return [m("p", null, flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.see_popup')), m("a", {
+    return [m("a", {
       "class": "Button Button--primary",
       href: "/auth/saml/login",
       target: "_blank"
