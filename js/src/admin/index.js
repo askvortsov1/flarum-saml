@@ -13,7 +13,11 @@ app.initializers.add('askvortsov/saml', () => {
                 title: app.translator.trans('askvortsov-saml.admin.title'),
                 type: 'small',
                 items: [
-                    <StringItem key="askvortsov-saml.idp_metadata" required>
+                    <p>Make sure that either the metadata url or the metadata is filled in.</p>,
+                    <StringItem key="askvortsov-saml.idp_metadata_url" id="askvortsov-saml-metadata_url">
+                        {app.translator.trans('askvortsov-saml.admin.labels.idp_metadata_url')}
+                    </StringItem>,
+                    <StringItem key="askvortsov-saml.idp_metadata" id="askvortsov-saml-metadata">
                         {app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')}
                     </StringItem>,
                     <BooleanItem key="askvortsov-saml.only_option" required>

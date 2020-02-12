@@ -123,9 +123,12 @@ app.initializers.add('askvortsov/saml', function () {
     return app.modal.show(new SettingsModal({
       title: app.translator.trans('askvortsov-saml.admin.title'),
       type: 'small',
-      items: [m(StringItem, {
+      items: [m("p", null, "Make sure that either the metadata url or the metadata is filled in."), m(StringItem, {
+        key: "askvortsov-saml.idp_metadata_url",
+        id: "askvortsov-saml-metadata_url"
+      }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata_url')), m(StringItem, {
         key: "askvortsov-saml.idp_metadata",
-        required: true
+        id: "askvortsov-saml-metadata"
       }, app.translator.trans('askvortsov-saml.admin.labels.idp_metadata')), m(BooleanItem, {
         key: "askvortsov-saml.only_option",
         required: true

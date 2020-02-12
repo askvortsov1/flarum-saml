@@ -47,7 +47,14 @@ abstract class BaseSAMLController
              *
              * @return string XML string for IdP metadata
              */
-            $idp_xml  = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
+            try {
+                $idp_metadata_url  = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
+                $idp_xml = file_get_contents($idp_metadata_url);
+                $settings = IdPMetadataParser::parseXML($idp_xml);
+            } catch (\Exception $e) {
+                $idp_xml  = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
+                $settings = IdPMetadataParser::parseXML($idp_xml);
+            }
             $settings = IdPMetadataParser::parseXML($idp_xml);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

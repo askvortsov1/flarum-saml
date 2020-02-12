@@ -38,7 +38,6 @@ If one of these isn't included, or doesn't work, the rest should still work.
 ### TODO
 
 - Replace CSRF exemption workaround when Flarum Beta 12 is released.
-- Add support for using getting Identity Provider Metadata via a url vs having to paste it.
 - Add support for signing/encrypting SAMLRequests.
 
 ### Feedback
