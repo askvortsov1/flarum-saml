@@ -140,14 +140,13 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a.prototype, 'items', addSamlLoginButton);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_6___default.a.prototype, 'accountItems', removeProfileActions);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_6___default.a.prototype, 'settingsItems', checkRemoveAccountSection);
-  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_HeaderSecondary__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, "items", updateLoginHeader);
 
   function showSamlPopup(e) {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml')) {
       var win = window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no");
 
       if (win == null) {
-        win == window.open("/auth/saml/login", "_blank");
+        win = window.open("/auth/saml/login", "_blank");
       }
 
       if (win == null) {
@@ -156,10 +155,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
 
       win.focus();
     }
-  }
-
-  function updateLoginHeader(items) {
-    $('.item-logIn>button').add('.item-signUp>button').on("click", showSamlPopup);
   }
 
   function dontShowLoginModalIfOnlySaml() {
@@ -203,6 +198,10 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
       items.remove('account');
     }
   }
+
+  $(function () {
+    $('.item-logIn>button').add('.item-signUp>button').on("click", showSamlPopup);
+  });
 });
 
 /***/ }),

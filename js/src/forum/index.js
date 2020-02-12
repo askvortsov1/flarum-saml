@@ -15,23 +15,18 @@ app.initializers.add('askvortsov/saml', () => {
     extend(SettingsPage.prototype, 'accountItems', removeProfileActions);
     extend(SettingsPage.prototype, 'settingsItems', checkRemoveAccountSection);
 
-    extend(HeaderSecondary.prototype, "items", updateLoginHeader);
 
     function showSamlPopup(e) {
         if (app.forum.attribute('onlyUseSaml')) {
             var win = window.open("/auth/saml/login", "_blank", "height=500,width=600,resizable=no,toolbar=no,menubar=no,location=no,status=no")
             if (win == null) {
-                win == window.open("/auth/saml/login", "_blank")
+                win = window.open("/auth/saml/login", "_blank");
             }
             if (win == null) {
                 alert(app.translator.trans('askvortsov-saml.forum.log_in.enable_popups'))
             }
             win.focus();
         }
-    }
-
-    function updateLoginHeader(items) {
-        $('.item-logIn>button').add('.item-signUp>button').on("click", showSamlPopup);
     }
 
     function dontShowLoginModalIfOnlySaml() {
@@ -84,4 +79,8 @@ app.initializers.add('askvortsov/saml', () => {
             items.remove('account');
         }
     }
+
+    $(function () {
+        $('.item-logIn>button').add('.item-signUp>button').on("click", showSamlPopup);
+    });
 });
