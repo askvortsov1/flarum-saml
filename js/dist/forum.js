@@ -157,9 +157,17 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
     }
   }
 
+  function seePopupText() {
+    return [m("p", null, flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.see_popup')), m("a", {
+      "class": "Button Button--primary",
+      href: "/auth/saml/login",
+      target: "_blank"
+    }, flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.open_popup'))];
+  }
+
   function dontShowLoginModalIfOnlySaml() {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml')) {
-      return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_login');
+      return seePopupText();
     } else {
       return [m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a, null), m("div", {
         className: "Form Form--centered"
@@ -169,7 +177,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
 
   function dontShowSignupModalIfOnlySaml() {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml') && (jQuery.isEmptyObject(this.props) || this.props.username == "" && this.props.password == "")) {
-      return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_register');
+      return seePopupText();
     } else {
       console.log(this.props);
       return [this.props.token ? '' : m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a, null), m("div", {

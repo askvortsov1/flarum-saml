@@ -29,9 +29,17 @@ app.initializers.add('askvortsov/saml', () => {
         }
     }
 
+    function seePopupText() {
+        return [
+            <p>{app.translator.trans('askvortsov-saml.forum.log_in.see_popup')}</p>,
+            <a class="Button Button--primary" href="/auth/saml/login" target="_blank">{app.translator.trans('askvortsov-saml.forum.log_in.open_popup')}</a>
+        ]
+    }
+
+
     function dontShowLoginModalIfOnlySaml() {
         if (app.forum.attribute('onlyUseSaml')) {
-            return app.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_login');
+            return seePopupText();
         } else {
             return [
                 <LogInButtons />,
@@ -45,7 +53,7 @@ app.initializers.add('askvortsov/saml', () => {
 
     function dontShowSignupModalIfOnlySaml() {
         if (app.forum.attribute('onlyUseSaml') && (jQuery.isEmptyObject(this.props) || this.props.username == "" && this.props.password == "")) {
-            return app.translator.trans('askvortsov-saml.forum.log_in.see_popup_to_register');
+            return seePopupText();
         } else {
             console.log(this.props);
             return [
