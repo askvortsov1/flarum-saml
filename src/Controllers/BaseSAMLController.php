@@ -36,28 +36,16 @@ abstract class BaseSAMLController
         $this->url = $url;
     }
 
-    public function auth(): Auth {
+    public function auth(bool $incorporateIdpMetadata = false): Auth {
         static $instance;
         if (!empty($instance)) {
             return $instance;
         }
-        try {
-            /**
-             * Filters the XML metadata for IdP authority
-             *
-             * @return string XML string for IdP metadata
-             */
-            try {
-                $idp_metadata_url  = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
-                $idp_xml = file_get_contents($idp_metadata_url);
-                $settings = IdPMetadataParser::parseXML($idp_xml);
-            } catch (\Exception $e) {
-                $idp_xml  = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
-                $settings = IdPMetadataParser::parseXML($idp_xml);
-            }
-            $settings = IdPMetadataParser::parseXML($idp_xml);
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+
+        $settings = [];
+
+        if ($incorporateIdpMetadata) {
+            $settings = $this->incorporateIdpMetadata($settings);
         }
 
         $settings['sp'] = [
@@ -80,5 +68,25 @@ abstract class BaseSAMLController
         }
 
         return $instance;
+    }
+
+    public function incorporateIdpMetadata($settings) {
+        try {
+            /**
+             * Filters the XML metadata for IdP authority
+             *
+             * @return string XML string for IdP metadata
+             */
+            try {
+                $idp_metadata_url  = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
+                $metadataSettings = IdPMetadataParser::parseRemoteXML($idp_metadata_url);
+            } catch (\Exception $e) {
+                $idp_xml  = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
+                $metadataSettings = IdPMetadataParser::parseXML($idp_xml);
+            }
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return IdPMetadataParser::injectIntoSettings($settings, $metadataSettings);
     }
 }

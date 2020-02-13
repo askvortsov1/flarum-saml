@@ -13,7 +13,7 @@ class LoginController extends BaseSAMLController implements RequestHandlerInterf
     public function handle(Request $request): Response
     {
         try {
-            $auth = $this->auth();
+            $auth = $this->auth(true);
         } catch (\Exception $e) {
             return new HtmlResponse("Invalid SAML Configuration: Check Settings");
         }

@@ -15,7 +15,7 @@ class MetadataController extends BaseSAMLController implements RequestHandlerInt
     public function handle(Request $request): Response
     {
         try {
-            $auth     = $this->auth();
+            $auth     = $this->auth(false);
         } catch (\Exception $e) {
             return new HtmlResponse("Invalid SAML Configuration: Check Settings");
         }
