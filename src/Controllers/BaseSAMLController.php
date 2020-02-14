@@ -8,6 +8,7 @@ use Flarum\Http\UrlGenerator;
 use Flarum\Settings\SettingsRepositoryInterface;
 use OneLogin\Saml2\Auth;
 use OneLogin\Saml2\IdPMetadataParser;
+use OneLogin\Saml2\Settings;
 
 abstract class BaseSAMLController
 {
@@ -36,12 +37,18 @@ abstract class BaseSAMLController
         $this->url = $url;
     }
 
-    public function auth(bool $incorporateIdpMetadata = false): Auth {
+    public function auth(): Auth {
         static $instance;
-        if (!empty($instance)) {
+        if (empty($instance)) {
+            $settings = $this->compileSettings(true);
+            $instance = new Auth($settings);
+            return $instance;
+        } else {
             return $instance;
         }
+    }
 
+    public function compileSettings(bool $incorporateIdpMetadata = true) {
         $settings = [];
 
         if ($incorporateIdpMetadata) {
@@ -62,12 +69,8 @@ abstract class BaseSAMLController
             'wantMessagesSigned' => true,
             'wantAssertionsSigned' => true,
         ];
+        return new Settings($settings, !$incorporateIdpMetadata);
 
-        if (empty($instance)) {
-            $instance = new Auth($settings);
-        }
-
-        return $instance;
     }
 
     public function incorporateIdpMetadata($settings) {
