@@ -40,7 +40,7 @@ abstract class BaseSAMLController
     public function auth(): Auth {
         static $instance;
         if (empty($instance)) {
-            $settings = $this->compileSettings(true);
+            $settings = $this->compileSettingsArray(true);
             $instance = new Auth($settings);
             return $instance;
         } else {
