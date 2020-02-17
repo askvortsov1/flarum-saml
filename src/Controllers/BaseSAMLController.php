@@ -48,7 +48,7 @@ abstract class BaseSAMLController
         }
     }
 
-    public function compileSettings(bool $incorporateIdpMetadata = true) {
+    public function compileSettingsArray(bool $incorporateIdpMetadata = true) {
         $settings = [];
 
         if ($incorporateIdpMetadata) {
@@ -69,8 +69,11 @@ abstract class BaseSAMLController
             'wantMessagesSigned' => true,
             'wantAssertionsSigned' => true,
         ];
-        return new Settings($settings, !$incorporateIdpMetadata);
+        return $settings;
+    }
 
+    public function packageSettings($settings, $validateSpOnly = true) {
+        return new Settings($settings, $validateSpOnly);
     }
 
     public function incorporateIdpMetadata($settings) {
