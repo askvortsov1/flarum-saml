@@ -10,7 +10,7 @@ namespace Askvortsov\FlarumSAML\Listener;
 use Flarum\Foundation\Application;
 use Flarum\Event\ConfigureMiddleware;
 use Flarum\Http\Middleware as HttpMiddleware;
-use Zend\Stratigility\MiddlewarePipe;
+use Laminas\Stratigility\MiddlewarePipe;
 use Flarum\Foundation\ErrorHandling\Registry;
 use Flarum\Foundation\ErrorHandling\Reporter;
 use Flarum\Foundation\ErrorHandling\ViewFormatter;
