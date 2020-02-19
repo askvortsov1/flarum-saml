@@ -16,6 +16,8 @@ use FoF\Components\Extend\AddFofComponents;
 
 use Askvortsov\FlarumSAML\Controllers;
 use Askvortsov\FlarumSAML\Listener;
+use Askvortsov\FlarumSAML\Middleware;
+use Flarum\Http\Middleware as HttpMiddleware;
 use Illuminate\Contracts\Events\Dispatcher;
 
 
@@ -39,6 +41,9 @@ return [
         ->get('/auth/saml/login', 'askvortsov-saml.login', Controllers\LoginController::class)
         ->get('/auth/saml/logout', 'askvortsov-saml.logout', Controllers\LogoutController::class)
         ->post('/auth/saml/acs', 'askvortsov-saml.acs', Controllers\ACSController::class),
+
+    (new Extend\Middleware('forum'))
+        ->insertBefore(HttpMiddleware\CheckCsrfToken::class, Middleware\CsrfExempt::class),
 
     new Extend\Locales(__DIR__ . '/resources/locale')
 ];
