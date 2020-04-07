@@ -137,6 +137,7 @@ __webpack_require__.r(__webpack_exports__);
 flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/saml', function () {
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_LogInModal__WEBPACK_IMPORTED_MODULE_5___default.a.prototype, 'body', dontShowLoginModalIfOnlySaml);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_7___default.a.prototype, 'body', dontShowSignupModalIfOnlySaml);
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["override"])(flarum_components_SignUpModal__WEBPACK_IMPORTED_MODULE_7___default.a.prototype, 'title', clarifySignupModalTitleAfterSaml);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a.prototype, 'items', addSamlLoginButton);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_6___default.a.prototype, 'accountItems', removeProfileActions);
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_SettingsPage__WEBPACK_IMPORTED_MODULE_6___default.a.prototype, 'settingsItems', checkRemoveAccountSection);
@@ -175,11 +176,20 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
     }
   }
 
+  function clarifySignupModalTitleAfterSaml() {
+    console.log('titling');
+
+    if (!this.props.token) {
+      return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('core.forum.sign_up.title');
+    }
+
+    return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('askvortsov-saml.forum.sign_up.post_saml_title');
+  }
+
   function dontShowSignupModalIfOnlySaml() {
     if (flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('onlyUseSaml') && (jQuery.isEmptyObject(this.props) || this.props.username == "" && this.props.password == "")) {
       return seePopupText();
     } else {
-      console.log(this.props);
       return [this.props.token ? '' : m(flarum_components_LogInButtons__WEBPACK_IMPORTED_MODULE_4___default.a, null), m("div", {
         className: "Form Form--centered"
       }, this.fields().toArray())];
@@ -208,7 +218,7 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
   }
 
   $(function () {
-    $('.item-logIn>button').add('.item-signUp>button').on("click", showSamlPopup);
+    $('.item-logIn>button,.item-signUp>button').on("click", showSamlPopup);
   });
 });
 

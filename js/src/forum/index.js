@@ -10,6 +10,7 @@ import SignUpModal from "flarum/components/SignUpModal";
 app.initializers.add('askvortsov/saml', () => {
     override(LogInModal.prototype, 'body', dontShowLoginModalIfOnlySaml);
     override(SignUpModal.prototype, 'body', dontShowSignupModalIfOnlySaml);
+    override(SignUpModal.prototype, 'title', clarifySignupModalTitleAfterSaml);
     extend(LogInButtons.prototype, 'items', addSamlLoginButton);
 
     extend(SettingsPage.prototype, 'accountItems', removeProfileActions);
@@ -50,11 +51,19 @@ app.initializers.add('askvortsov/saml', () => {
         }
     }
 
+    function clarifySignupModalTitleAfterSaml() {
+        console.log('titling');
+        if (!this.props.token) {
+            return app.translator.trans('core.forum.sign_up.title');
+        }
+
+        return app.translator.trans('askvortsov-saml.forum.sign_up.post_saml_title');
+    }
+
     function dontShowSignupModalIfOnlySaml() {
         if (app.forum.attribute('onlyUseSaml') && (jQuery.isEmptyObject(this.props) || this.props.username == "" && this.props.password == "")) {
             return seePopupText();
         } else {
-            console.log(this.props);
             return [
                 this.props.token ? '' : <LogInButtons />,
 
@@ -88,6 +97,6 @@ app.initializers.add('askvortsov/saml', () => {
     }
 
     $(function () {
-        $('.item-logIn>button').add('.item-signUp>button').on("click", showSamlPopup);
+        $('.item-logIn>button,.item-signUp>button').on("click", showSamlPopup);
     });
 });
