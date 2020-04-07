@@ -177,8 +177,6 @@ flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.initializers.add('askvortsov/s
   }
 
   function clarifySignupModalTitleAfterSaml() {
-    console.log('titling');
-
     if (!this.props.token) {
       return flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.translator.trans('core.forum.sign_up.title');
     }

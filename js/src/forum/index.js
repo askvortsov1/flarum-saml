@@ -52,7 +52,6 @@ app.initializers.add('askvortsov/saml', () => {
     }
 
     function clarifySignupModalTitleAfterSaml() {
-        console.log('titling');
         if (!this.props.token) {
             return app.translator.trans('core.forum.sign_up.title');
         }
