@@ -1,13 +1,20 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-saml
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumSAML\Controllers;
 
-use Askvortsov\FlarumSAML\Controllers\BaseSAMLController;
+use Laminas\Diactoros\Response\XmlResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface;
-use Laminas\Diactoros\Response\XmlResponse;
-
 
 class MetadataController extends BaseSAMLController implements RequestHandlerInterface
 {
@@ -16,9 +23,10 @@ class MetadataController extends BaseSAMLController implements RequestHandlerInt
         $useIdpInfo = false;
         $settingsArr = $this->compileSettingsArray($useIdpInfo);
         $settings = $this->packageSettings($settingsArr, !$useIdpInfo);
+
         try {
             $metadata = $settings->getSPMetadata();
-            $errors   = $settings->validateMetadata($metadata);
+            $errors = $settings->validateMetadata($metadata);
         } catch (\Exception $e) {
             $errors = $e->getMessage();
         }
@@ -26,6 +34,7 @@ class MetadataController extends BaseSAMLController implements RequestHandlerInt
         if ($errors) {
             throw new \Exception($errors);
         }
+
         return new XmlResponse($metadata);
     }
 }

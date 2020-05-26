@@ -1,5 +1,13 @@
 <?php
-// Add CSRF exemption middleware. Hopefully this should become unnecessary if a more elegant way to exempt routes from CSRF is added to core.
+
+/*
+ * This file is part of askvortsov/flarum-saml
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
 
 namespace Askvortsov\FlarumSAML\Middleware;
 
@@ -7,7 +15,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\MiddlewareInterface as Middleware;
 use Psr\Http\Server\RequestHandlerInterface as Handler;
-
 
 class CsrfExempt implements Middleware
 {
@@ -17,6 +24,7 @@ class CsrfExempt implements Middleware
         if ($path === '/auth/saml/acs') {
             return $handler->handle($request->withAttribute('bypassCsrfToken', true));
         }
+
         return $handler->handle($request);
     }
 }

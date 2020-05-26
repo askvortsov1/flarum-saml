@@ -1,35 +1,30 @@
 <?php
 
 /*
- * This file is part of askvortsov/flarum-saml.
+ * This file is part of askvortsov/flarum-saml
  *
- * Copyright (c) 2020 Alexander Skvortsov.
+ *  Copyright (c) 2020 Alexander Skvortsov.
  *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
  */
 
 namespace Askvortsov\FlarumSAML;
 
 use Flarum\Extend;
-use FoF\Components\Extend\AddFofComponents;
-
-use Askvortsov\FlarumSAML\Controllers;
-use Askvortsov\FlarumSAML\Listener;
-use Askvortsov\FlarumSAML\Middleware;
 use Flarum\Http\Middleware as HttpMiddleware;
+use FoF\Components\Extend\AddFofComponents;
 use Illuminate\Contracts\Events\Dispatcher;
-
 
 return [
     new AddFofComponents(),
 
     (new Extend\Frontend('forum'))
-        ->js(__DIR__ . '/js/dist/forum.js')
-        ->css(__DIR__ . '/resources/less/forum.less'),
+        ->js(__DIR__.'/js/dist/forum.js')
+        ->css(__DIR__.'/resources/less/forum.less'),
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__ . '/js/dist/admin.js'),
+        ->js(__DIR__.'/js/dist/admin.js'),
 
     function (Dispatcher $events) {
         $events->subscribe(Listener\AddSettings::class);
@@ -44,5 +39,5 @@ return [
     (new Extend\Middleware('forum'))
         ->insertBefore(HttpMiddleware\CheckCsrfToken::class, Middleware\CsrfExempt::class),
 
-    new Extend\Locales(__DIR__ . '/resources/locale')
+    new Extend\Locales(__DIR__.'/resources/locale'),
 ];

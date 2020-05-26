@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of askvortsov/flarum-saml
+ *
+ *  Copyright (c) 2020 Alexander Skvortsov.
+ *
+ *  For detailed copyright and license information, please view the
+ *  LICENSE file that was distributed with this source code.
+ */
+
 namespace Askvortsov\FlarumSAML\Controllers;
 
 use Flarum\Extension\ExtensionManager;
@@ -37,18 +46,21 @@ abstract class BaseSAMLController
         $this->url = $url;
     }
 
-    public function auth(): Auth {
+    public function auth(): Auth
+    {
         static $instance;
         if (empty($instance)) {
             $settings = $this->compileSettingsArray(true);
             $instance = new Auth($settings);
+
             return $instance;
         } else {
             return $instance;
         }
     }
 
-    public function compileSettingsArray(bool $incorporateIdpMetadata = true) {
+    public function compileSettingsArray(bool $incorporateIdpMetadata = true)
+    {
         $settings = [];
 
         if ($incorporateIdpMetadata) {
@@ -66,33 +78,37 @@ abstract class BaseSAMLController
             'NameIDFormat'             => $this->settings->get('askvortsov-saml.nameid_format', 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress'),
         ];
         $settings['security'] = [
-            'wantMessagesSigned' => true,
+            'wantMessagesSigned'   => true,
             'wantAssertionsSigned' => true,
         ];
+
         return $settings;
     }
 
-    public function packageSettings($settings, $validateSpOnly = true) {
+    public function packageSettings($settings, $validateSpOnly = true)
+    {
         return new Settings($settings, $validateSpOnly);
     }
 
-    public function incorporateIdpMetadata($settings) {
+    public function incorporateIdpMetadata($settings)
+    {
         try {
             /**
-             * Filters the XML metadata for IdP authority
+             * Filters the XML metadata for IdP authority.
              *
              * @return string XML string for IdP metadata
              */
             try {
-                $idp_metadata_url  = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
+                $idp_metadata_url = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
                 $metadataSettings = IdPMetadataParser::parseRemoteXML($idp_metadata_url);
             } catch (\Exception $e) {
-                $idp_xml  = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
+                $idp_xml = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
                 $metadataSettings = IdPMetadataParser::parseXML($idp_xml);
             }
         } catch (\Exception $e) {
             throw $e;
         }
+
         return IdPMetadataParser::injectIntoSettings($settings, $metadataSettings);
     }
 }
