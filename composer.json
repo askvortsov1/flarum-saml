@@ -7,10 +7,10 @@
     "type": "flarum-extension",
     "license": "MIT",
     "require": {
-        "flarum/core": ">=0.1.0-beta.12",
-        "fof/components": ">=0.1.0",
-        "onelogin/php-saml": "^3.0.0",
-        "askvortsov/flarum-auth-sync": ">=0.1.0"
+      "flarum/core": "^0.1.0-beta.14",
+      "fof/components": ">=0.1.1",
+      "onelogin/php-saml": "^3.0.0",
+      "askvortsov/flarum-auth-sync": ">=1.0.0"
     },
     "authors": [
         {
