@@ -100,10 +100,7 @@ app.initializers.add("askvortsov/saml", () => {
   }
 
   function checkRemoveAccountSection(items) {
-    if (
-      items.has("account") &&
-      items.get("account").children.length === 0
-    ) {
+    if (items.has("account") && items.get("account").children.length === 0) {
       items.remove("account");
     }
   }
