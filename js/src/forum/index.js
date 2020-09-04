@@ -56,7 +56,7 @@ app.initializers.add("askvortsov/saml", () => {
   }
 
   function clarifySignupModalTitleAfterSaml() {
-    if (!this.props.token) {
+    if (!this.attrs.token) {
       return app.translator.trans("core.forum.sign_up.title");
     }
 
@@ -68,13 +68,13 @@ app.initializers.add("askvortsov/saml", () => {
   function dontShowSignupModalIfOnlySaml() {
     if (
       app.forum.attribute("onlyUseSaml") &&
-      (jQuery.isEmptyObject(this.props) ||
-        (this.props.username == "" && this.props.password == ""))
+      (jQuery.isEmptyObject(this.attrs) ||
+        (this.attrs.username == "" && this.attrs.password == ""))
     ) {
       return seePopupText();
     } else {
       return [
-        this.props.token ? "" : <LogInButtons />,
+        this.attrs.token ? "" : <LogInButtons />,
 
         <div className="Form Form--centered">{this.fields().toArray()}</div>,
       ];
@@ -102,7 +102,7 @@ app.initializers.add("askvortsov/saml", () => {
   function checkRemoveAccountSection(items) {
     if (
       items.has("account") &&
-      items.get("account").props.children.length === 0
+      items.get("account").children.length === 0
     ) {
       items.remove("account");
     }
