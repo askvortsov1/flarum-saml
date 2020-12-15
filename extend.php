@@ -13,17 +13,16 @@ namespace Askvortsov\FlarumSAML;
 
 use Flarum\Extend;
 use FoF\Components\Extend\AddFofComponents;
-use Illuminate\Contracts\Events\Dispatcher;
 
 return [
     new AddFofComponents(),
 
     (new Extend\Frontend('forum'))
-        ->js(__DIR__ . '/js/dist/forum.js')
-        ->css(__DIR__ . '/resources/less/forum.less'),
+        ->js(__DIR__.'/js/dist/forum.js')
+        ->css(__DIR__.'/resources/less/forum.less'),
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__ . '/js/dist/admin.js'),
+        ->js(__DIR__.'/js/dist/admin.js'),
 
     (new Extend\Settings())
         ->serializeToForum('onlyUseSaml', 'askvortsov-saml.only_option', function ($val) {
@@ -36,8 +35,8 @@ return [
         ->get('/auth/saml/logout', 'askvortsov-saml.logout', Controllers\LogoutController::class)
         ->post('/auth/saml/acs', 'askvortsov-saml.acs', Controllers\ACSController::class),
 
-    (new Extend\Csrf)
+    (new Extend\Csrf())
         ->exemptRoute('askvortsov-saml.acs'),
 
-    new Extend\Locales(__DIR__ . '/resources/locale'),
+    new Extend\Locales(__DIR__.'/resources/locale'),
 ];
