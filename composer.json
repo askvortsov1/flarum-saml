@@ -6,9 +6,13 @@
     ],
     "type": "flarum-extension",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/askvortsov1/flarum-saml/issues",
+        "source": "https://github.com/askvortsov1/flarum-saml",
+        "forum": "https://discuss.flarum.org/d/22757-flarum-saml"
+    },
     "require": {
-      "flarum/core": "^0.1.0-beta.14",
-      "fof/components": ">=0.1.1",
+      "flarum/core": "^0.1.0-beta.15",
       "onelogin/php-saml": "^3.0.0"
     },
     "authors": [
@@ -25,15 +29,13 @@
     },
     "extra": {
         "flarum-extension": {
-            "title": "Flarum SAML2 SSO",
+            "title": "SAML2 SSO",
+            "category": "authentication",
             "icon": {
                 "name": "fas fa-lock",
                 "backgroundColor": "#6932D1",
                 "color": "#fff"
             }
-        },
-        "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/22757-flarum-saml"
         }
     }
 }

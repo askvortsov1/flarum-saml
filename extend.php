@@ -12,7 +12,6 @@
 namespace Askvortsov\FlarumSAML;
 
 use Flarum\Extend;
-use Flarum\Http\Middleware as HttpMiddleware;
 use FoF\Components\Extend\AddFofComponents;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -20,15 +19,16 @@ return [
     new AddFofComponents(),
 
     (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/resources/less/forum.less'),
+        ->js(__DIR__ . '/js/dist/forum.js')
+        ->css(__DIR__ . '/resources/less/forum.less'),
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__.'/js/dist/admin.js'),
+        ->js(__DIR__ . '/js/dist/admin.js'),
 
-    function (Dispatcher $events) {
-        $events->subscribe(Listener\AddSettings::class);
-    },
+    (new Extend\Settings())
+        ->serializeToForum('onlyUseSaml', 'askvortsov-saml.only_option', function ($val) {
+            return (bool) $val;
+        }),
 
     (new Extend\Routes('forum'))
         ->get('/auth/saml/metadata', 'askvortsov-saml.metadata', Controllers\MetadataController::class)
@@ -36,8 +36,8 @@ return [
         ->get('/auth/saml/logout', 'askvortsov-saml.logout', Controllers\LogoutController::class)
         ->post('/auth/saml/acs', 'askvortsov-saml.acs', Controllers\ACSController::class),
 
-    (new Extend\Middleware('forum'))
-        ->insertBefore(HttpMiddleware\CheckCsrfToken::class, Middleware\CsrfExempt::class),
+    (new Extend\Csrf)
+        ->exemptRoute('askvortsov-saml.acs'),
 
-    new Extend\Locales(__DIR__.'/resources/locale'),
+    new Extend\Locales(__DIR__ . '/resources/locale'),
 ];
