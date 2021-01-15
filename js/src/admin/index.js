@@ -1,10 +1,3 @@
-import { settings } from "@fof-components";
-
-const {
-  SettingsModal,
-  items: { BooleanItem, SelectItem, StringItem },
-} = settings;
-
 app.initializers.add("askvortsov/saml", () => {
   app.extensionData
     .for("askvortsov-saml")
