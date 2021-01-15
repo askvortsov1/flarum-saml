@@ -19,18 +19,6 @@ app.initializers.add("askvortsov/saml", () => {
       type: "text",
     })
     .registerSetting({
-      setting: "askvortsov-saml.only_option",
-      label: app.translator.trans("askvortsov-saml.admin.labels.only_option"),
-      type: "boolean",
-    })
-    .registerSetting({
-      setting: "askvortsov-saml.sync_attributes",
-      label: app.translator.trans(
-        "askvortsov-saml.admin.labels.sync_attributes"
-      ),
-      type: "boolean",
-    })
-    .registerSetting({
       setting: "askvortsov-saml.nameid_format",
       label: app.translator.trans("askvortsov-saml.admin.labels.nameid_format"),
       type: "select",
@@ -45,5 +33,31 @@ app.initializers.add("askvortsov/saml", () => {
           "askvortsov-saml.admin.options.nameid_format.unspecified"
         ),
       },
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.want_assertions_signed",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.want_assertions_signed"
+      ),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.want_messages_signed",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.want_messages_signed"
+      ),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.only_option",
+      label: app.translator.trans("askvortsov-saml.admin.labels.only_option"),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.sync_attributes",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.sync_attributes"
+      ),
+      type: "boolean",
     });
 });

@@ -78,8 +78,8 @@ abstract class BaseSAMLController
             'NameIDFormat'             => $this->settings->get('askvortsov-saml.nameid_format', 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress'),
         ];
         $settings['security'] = [
-            'wantMessagesSigned'   => true,
-            'wantAssertionsSigned' => true,
+            'wantMessagesSigned'   => $this->settings->get('askvortsov-saml.want_messages_signed', true),
+            'wantAssertionsSigned' => $this->settings->get('askvortsov-saml.want_assertions_signed', true),
         ];
 
         return $settings;
