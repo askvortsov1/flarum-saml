@@ -74,11 +74,13 @@ class ACSController extends BaseSAMLController implements RequestHandlerInterfac
             }
         }
 
+        $avatar = $saml->getAttribute('avatar')[0];
+
         if ($this->extensions->isEnabled('askvortsov-auth-sync') && $this->settings->get('askvortsov-saml.sync_attributes', '')) {
             $event = new AuthSyncEvent();
             $event->email = $email;
             $event->attributes = json_encode([
-                'avatar'                => $saml->getAttribute('avatar')[0],
+                'avatar'                => $avatar,
                 'bio'                   => $saml->getAttribute('bio')[0],
                 'groups'                => explode(',', $saml->getAttribute('groups')[0]),
                 'masquerade_attributes' => $masquerade_attributes,
@@ -90,12 +92,15 @@ class ACSController extends BaseSAMLController implements RequestHandlerInterfac
         return $this->response->make(
             'saml-sso',
             $saml->getNameId(),
-            function (Registration $registration) use ($saml, $email) {
+            function (Registration $registration) use ($avatar, $email) {
                 $registration
                     ->provideTrustedEmail($email)
-                    ->provideAvatar($saml->getAttribute('avatar')[0])
                     ->suggestUsername('')
                     ->setPayload([]);
+
+                if ($avatar) {
+                    $registration->provideAvatar($avatar);
+                }
             }
         );
     }
