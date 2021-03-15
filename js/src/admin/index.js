@@ -2,9 +2,7 @@ app.initializers.add("askvortsov/saml", () => {
   app.extensionData
     .for("askvortsov-saml")
     .registerSetting(() => (
-      <p>
-        Make sure that either the metadata url or the metadata is filled in.
-      </p>
+      <p>{app.translator.trans("askvortsov-saml.admin.header.text")}</p>
     ))
     .registerSetting({
       setting: "askvortsov-saml-metadata_url",
