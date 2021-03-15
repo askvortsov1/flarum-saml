@@ -12,7 +12,7 @@
         "forum": "https://discuss.flarum.org/d/22757-flarum-saml"
     },
     "require": {
-      "flarum/core": "^0.1.0-beta.15",
+      "flarum/core": "^0.1.0-beta.16",
       "onelogin/php-saml": "^3.0.0"
     },
     "authors": [
@@ -30,7 +30,7 @@
     "extra": {
         "flarum-extension": {
             "title": "SAML2 SSO",
-            "category": "authentication",
+            "category": "feature",
             "icon": {
                 "name": "fas fa-lock",
                 "backgroundColor": "#6932D1",

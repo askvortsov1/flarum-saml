@@ -22,9 +22,7 @@ return [
         ->js(__DIR__.'/js/dist/admin.js'),
 
     (new Extend\Settings())
-        ->serializeToForum('onlyUseSaml', 'askvortsov-saml.only_option', function ($val) {
-            return (bool) $val;
-        }),
+        ->serializeToForum('onlyUseSaml', 'askvortsov-saml.only_option', 'boolval'),
 
     (new Extend\Routes('forum'))
         ->get('/auth/saml/metadata', 'askvortsov-saml.metadata', Controllers\MetadataController::class)
