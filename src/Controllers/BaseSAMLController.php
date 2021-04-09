@@ -97,12 +97,12 @@ abstract class BaseSAMLController
 
         if (!empty($idp_metadata_url)) {
             $metadataSettings = IdPMetadataParser::parseRemoteXML($idp_metadata_url);
-        } else if (!empty($idp_xml)) {
+        } elseif (!empty($idp_xml)) {
             $metadataSettings = IdPMetadataParser::parseXML($idp_xml);
         } else {
-            throw new \RuntimeException("Either a metadata URL or XML must be provided");
+            throw new \RuntimeException('Either a metadata URL or XML must be provided');
         }
-    
+
         return IdPMetadataParser::injectIntoSettings($settings, $metadataSettings);
     }
 }
