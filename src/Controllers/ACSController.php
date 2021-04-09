@@ -27,13 +27,15 @@ class ACSController extends BaseSAMLController implements RequestHandlerInterfac
         try {
             $saml = $this->auth(true);
         } catch (\Exception $e) {
+            resolve('log')->error($e->getMessage());
+            
             return new HtmlResponse('Invalid SAML Configuration: Check Settings');
         }
 
         try {
             $saml->processResponse();
         } catch (\Exception $e) {
-            throw $e;
+            resolve('log')->error($e->getMessage());
 
             return new HtmlResponse('Could not process response: '.$e->getMessage());
         }

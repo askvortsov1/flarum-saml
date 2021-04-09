@@ -24,16 +24,8 @@ class MetadataController extends BaseSAMLController implements RequestHandlerInt
         $settingsArr = $this->compileSettingsArray($useIdpInfo);
         $settings = $this->packageSettings($settingsArr, !$useIdpInfo);
 
-        try {
-            $metadata = $settings->getSPMetadata();
-            $errors = $settings->validateMetadata($metadata);
-        } catch (\Exception $e) {
-            $errors = $e->getMessage();
-        }
-
-        if ($errors) {
-            throw new \Exception($errors);
-        }
+        $metadata = $settings->getSPMetadata();
+        $errors = $settings->validateMetadata($metadata);
 
         return new XmlResponse($metadata);
     }
