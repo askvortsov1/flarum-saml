@@ -5,14 +5,14 @@ app.initializers.add("askvortsov/saml", () => {
       <p>{app.translator.trans("askvortsov-saml.admin.header.text")}</p>
     ))
     .registerSetting({
-      setting: "askvortsov-saml-metadata_url",
+      setting: "askvortsov-saml.idp_metadata_url",
       label: app.translator.trans(
         "askvortsov-saml.admin.labels.idp_metadata_url"
       ),
       type: "text",
     })
     .registerSetting({
-      setting: "askvortsov-saml-metadata",
+      setting: "askvortsov-saml.idp_metadata",
       label: app.translator.trans("askvortsov-saml.admin.labels.idp_metadata"),
       type: "text",
     })
