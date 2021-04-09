@@ -92,23 +92,17 @@ abstract class BaseSAMLController
 
     public function incorporateIdpMetadata($settings)
     {
-        try {
-            /**
-             * Filters the XML metadata for IdP authority.
-             *
-             * @return string XML string for IdP metadata
-             */
-            try {
-                $idp_metadata_url = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
-                $metadataSettings = IdPMetadataParser::parseRemoteXML($idp_metadata_url);
-            } catch (\Exception $e) {
-                $idp_xml = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
-                $metadataSettings = IdPMetadataParser::parseXML($idp_xml);
-            }
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        $idp_metadata_url = trim($this->settings->get('askvortsov-saml.idp_metadata_url', ''));
+        $idp_xml = trim($this->settings->get('askvortsov-saml.idp_metadata', ''));
 
+        if (!empty($idp_metadata_url)) {
+            $metadataSettings = IdPMetadataParser::parseRemoteXML($idp_metadata_url);
+        } else if (!empty($idp_xml)) {
+            $metadataSettings = IdPMetadataParser::parseXML($idp_xml);
+        } else {
+            throw new \RuntimeException("Either a metadata URL or XML must be provided");
+        }
+    
         return IdPMetadataParser::injectIntoSettings($settings, $metadataSettings);
     }
 }
