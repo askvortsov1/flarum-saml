@@ -48,15 +48,8 @@ abstract class BaseSAMLController
 
     public function auth(): Auth
     {
-        static $instance;
-        if (empty($instance)) {
-            $settings = $this->compileSettingsArray(true);
-            $instance = new Auth($settings);
-
-            return $instance;
-        } else {
-            return $instance;
-        }
+        $settings = $this->compileSettingsArray(true);
+        return new Auth($settings);
     }
 
     public function compileSettingsArray(bool $incorporateIdpMetadata = true)
