@@ -15,7 +15,6 @@ use Askvortsov\FlarumSAML\SAMLTrait;
 use Flarum\User\Event\LoggedOut;
 use Laminas\Diactoros\Response\HtmlResponse;
 use OneLogin\Saml2\Error;
-use Psr\Http\Message\ResponseInterface as Response;
 
 class InitiateSLO
 {

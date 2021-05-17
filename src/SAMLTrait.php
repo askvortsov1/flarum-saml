@@ -22,6 +22,7 @@ trait SAMLTrait
     protected function auth(): Auth
     {
         $samlSettings = $this->compileSettingsArray(true);
+
         return new Auth($samlSettings);
     }
 
@@ -66,7 +67,7 @@ trait SAMLTrait
     {
         /** @var SettingsRepositoryInterface */
         $settings = resolve(SettingsRepositoryInterface::class);
-    
+
         $idp_metadata_url = trim($settings->get('askvortsov-saml.idp_metadata_url', ''));
         $idp_xml = trim($settings->get('askvortsov-saml.idp_metadata', ''));
 

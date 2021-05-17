@@ -32,7 +32,7 @@ return [
         ->get('/auth/saml/logout', 'askvortsov-saml.logout', Controllers\LogoutController::class)
         ->post('/auth/saml/acs', 'askvortsov-saml.acs', Controllers\ACSController::class),
 
-    (new Extend\Event)
+    (new Extend\Event())
         ->listen(LoggedOut::class, InitiateSLO::class),
 
     (new Extend\Csrf())

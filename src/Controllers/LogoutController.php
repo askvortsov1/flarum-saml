@@ -24,7 +24,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 class LogoutController implements RequestHandlerInterface
 {
     use SAMLTrait;
-    
+
     public function handle(Request $request): Response
     {
         try {
