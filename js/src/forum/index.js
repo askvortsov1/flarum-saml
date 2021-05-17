@@ -1,6 +1,5 @@
 import { extend, override } from "flarum/extend";
 import app from "flarum/app";
-import HeaderSecondary from "flarum/components/HeaderSecondary";
 import LogInButton from "flarum/components/LogInButton";
 import LogInButtons from "flarum/components/LogInButtons";
 import LogInModal from "flarum/components/LogInModal";
@@ -11,6 +10,11 @@ app.initializers.add("askvortsov/saml", () => {
   override(LogInModal.prototype, "body", dontShowLoginModalIfOnlySaml);
   override(SignUpModal.prototype, "body", dontShowSignupModalIfOnlySaml);
   override(SignUpModal.prototype, "title", clarifySignupModalTitleAfterSaml);
+  override(
+    SignUpModal.prototype,
+    "footer",
+    dontShowLoginModalLinkOnSamlConfirmation
+  );
   extend(LogInButtons.prototype, "items", addSamlLoginButton);
 
   extend(SettingsPage.prototype, "accountItems", removeProfileActions);
@@ -79,6 +83,12 @@ app.initializers.add("askvortsov/saml", () => {
         <div className="Form Form--centered">{this.fields().toArray()}</div>,
       ];
     }
+  }
+
+  function dontShowLoginModalLinkOnSamlConfirmation(original) {
+    if (!this.attrs.token) return original();
+
+    return [];
   }
 
   function addSamlLoginButton(items) {
