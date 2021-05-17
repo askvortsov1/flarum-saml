@@ -9,19 +9,19 @@
  *  LICENSE file that was distributed with this source code.
  */
 
-namespace Askvortsov\FlarumSAML\Controllers;
+namespace Askvortsov\FlarumSAML\Listeners;
 
 use Askvortsov\FlarumSAML\SAMLTrait;
+use Flarum\User\Event\LoggedOut;
 use Laminas\Diactoros\Response\HtmlResponse;
+use OneLogin\Saml2\Error;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Server\RequestHandlerInterface;
 
-class LoginController implements RequestHandlerInterface
+class InitiateSLO
 {
     use SAMLTrait;
 
-    public function handle(Request $request): Response
+    public function handle(LoggedOut $event)
     {
         try {
             $auth = $this->auth(true);
@@ -31,6 +31,14 @@ class LoginController implements RequestHandlerInterface
             return new HtmlResponse('Invalid SAML Configuration: Check Settings');
         }
 
-        return $auth->login();
+        try {
+            $auth->logout(null, [], $event->user->email);
+        } catch (Error $e) {
+            if ($e->getCode() === Error::SAML_SINGLE_LOGOUT_NOT_SUPPORTED) {
+                return;
+            }
+
+            throw $e;
+        }
     }
 }

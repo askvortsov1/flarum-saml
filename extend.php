@@ -11,7 +11,9 @@
 
 namespace Askvortsov\FlarumSAML;
 
+use Askvortsov\FlarumSAML\Listeners\InitiateSLO;
 use Flarum\Extend;
+use Flarum\User\Event\LoggedOut;
 
 return [
     (new Extend\Frontend('forum'))
@@ -29,6 +31,9 @@ return [
         ->get('/auth/saml/login', 'askvortsov-saml.login', Controllers\LoginController::class)
         ->get('/auth/saml/logout', 'askvortsov-saml.logout', Controllers\LogoutController::class)
         ->post('/auth/saml/acs', 'askvortsov-saml.acs', Controllers\ACSController::class),
+
+    (new Extend\Event)
+        ->listen(LoggedOut::class, InitiateSLO::class),
 
     (new Extend\Csrf())
         ->exemptRoute('askvortsov-saml.acs'),

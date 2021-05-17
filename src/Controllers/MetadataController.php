@@ -11,13 +11,16 @@
 
 namespace Askvortsov\FlarumSAML\Controllers;
 
+use Askvortsov\FlarumSAML\SAMLTrait;
 use Laminas\Diactoros\Response\XmlResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class MetadataController extends BaseSAMLController implements RequestHandlerInterface
+class MetadataController implements RequestHandlerInterface
 {
+    use SAMLTrait;
+
     public function handle(Request $request): Response
     {
         $useIdpInfo = false;

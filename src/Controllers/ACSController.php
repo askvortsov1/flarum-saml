@@ -12,16 +12,44 @@
 namespace Askvortsov\FlarumSAML\Controllers;
 
 use Askvortsov\FlarumAuthSync\Models\AuthSyncEvent;
+use Askvortsov\FlarumSAML\SAMLTrait;
 use Carbon\Carbon;
+use Flarum\Extension\ExtensionManager;
 use Flarum\Forum\Auth\Registration;
+use Flarum\Forum\Auth\ResponseFactory;
+use Flarum\Settings\SettingsRepositoryInterface;
 use Laminas\Diactoros\Response\HtmlResponse;
 use OneLogin\Saml2\Constants;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class ACSController extends BaseSAMLController implements RequestHandlerInterface
+class ACSController implements RequestHandlerInterface
 {
+    use SAMLTrait;
+
+    /**
+     * @var ResponseFactory
+     */
+    protected $response;
+
+    /**
+     * @var SettingsRepositoryInterface
+     */
+    protected $settings;
+
+    /**
+     * @var ExtensionManager
+     */
+    protected $extensions;
+
+    public function __construct(ResponseFactory $response, SettingsRepositoryInterface $settings, ExtensionManager $extensions)
+    {
+        $this->response = $response;
+        $this->settings = $settings;
+        $this->extensions = $extensions;
+    }
+
     public function handle(Request $request): Response
     {
         try {
