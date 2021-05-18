@@ -12,7 +12,9 @@
 namespace Askvortsov\FlarumSAML;
 
 use Askvortsov\FlarumSAML\Listeners\InitiateSLO;
+use Askvortsov\FlarumSAML\Middleware\DontSetCookie;
 use Flarum\Extend;
+use Flarum\Http\Middleware\StartSession;
 use Flarum\User\Event\LoggedOut;
 
 return [
@@ -39,4 +41,7 @@ return [
         ->exemptRoute('askvortsov-saml.acs'),
 
     new Extend\Locales(__DIR__.'/resources/locale'),
+
+    (new Extend\Middleware('forum'))
+        ->insertBefore(StartSession::class, DontSetCookie::class),
 ];
