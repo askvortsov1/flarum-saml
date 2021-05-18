@@ -49,10 +49,19 @@ trait SAMLTrait
                 'url' => $url->to('forum')->route('askvortsov-saml.logout'),
             ],
             'NameIDFormat'             => $settings->get('askvortsov-saml.nameid_format', 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress'),
+            'privateKey'               =>
+            $settings->get('askvortsov-saml.x509_key'),
+            'x509cert'                  =>
+            $settings->get('askvortsov-saml.x509_cert'),
         ];
         $samlSettings['security'] = [
-            'wantMessagesSigned'   => $settings->get('askvortsov-saml.want_messages_signed', true),
+            'authnRequestsSigned' => $settings->get('askvortsov-saml.authn_requests_signed', false),
+            'logoutRequestSigned' => $settings->get('askvortsov-saml.logout_request_signed', false),
+            'logoutResponseSigned' => $settings->get('askvortsov-saml.logout_response_signed', false),
+            'signMetadata' => $settings->get('askvortsov-saml.sign_metadata', false),
+            'wantAssertionsEncrypted' => $settings->get('askvortsov-saml.want_assertions_encrypted', false),
             'wantAssertionsSigned' => $settings->get('askvortsov-saml.want_assertions_signed', true),
+            'wantMessagesSigned'   => $settings->get('askvortsov-saml.want_messages_signed', true),
         ];
 
         return $samlSettings;

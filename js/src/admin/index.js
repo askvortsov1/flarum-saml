@@ -33,6 +33,39 @@ app.initializers.add("askvortsov/saml", () => {
       },
     })
     .registerSetting({
+      setting: "askvortsov-saml.authn_requests_signed",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.authn_requests_signed"
+      ),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.logout_request_signed",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.logout_request_signed"
+      ),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.logout_response_signed",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.logout_response_signed"
+      ),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.sign_metadata",
+      label: app.translator.trans("askvortsov-saml.admin.labels.sign_metadata"),
+      type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.want_assertions_encrypted",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.want_assertions_encrypted"
+      ),
+      type: "boolean",
+    })
+    .registerSetting({
       setting: "askvortsov-saml.want_assertions_signed",
       label: app.translator.trans(
         "askvortsov-saml.admin.labels.want_assertions_signed"
@@ -55,6 +88,16 @@ app.initializers.add("askvortsov/saml", () => {
       setting: "askvortsov-saml.only_option",
       label: app.translator.trans("askvortsov-saml.admin.labels.only_option"),
       type: "boolean",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.x509_key",
+      label: app.translator.trans("askvortsov-saml.admin.labels.x509_key"),
+      type: "text",
+    })
+    .registerSetting({
+      setting: "askvortsov-saml.x509_cert",
+      label: app.translator.trans("askvortsov-saml.admin.labels.x509_cert"),
+      type: "text",
     });
   // .registerSetting({
   //   setting: "askvortsov-saml.sync_attributes",
