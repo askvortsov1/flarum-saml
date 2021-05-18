@@ -18,7 +18,6 @@ use Flarum\Http\UrlGenerator;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
-use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use OneLogin\Saml2\Constants;
@@ -90,9 +89,8 @@ class LogoutController implements RequestHandlerInterface
         $response = new RedirectResponse($url);
 
         $actor = User::where('email', $email)->first();
-        
-        if ($session) {
 
+        if ($session) {
             $this->authenticator->logOut($session);
 
             $actor->accessTokens()->delete();

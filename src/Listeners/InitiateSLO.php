@@ -14,14 +14,13 @@ namespace Askvortsov\FlarumSAML\Listeners;
 use Askvortsov\FlarumSAML\SAMLTrait;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\Event\LoggedOut;
-use Laminas\Diactoros\Response\HtmlResponse;
 use OneLogin\Saml2\Error;
 use Psr\Log\LoggerInterface;
 
 class InitiateSLO
 {
     use SAMLTrait;
-    
+
     /**
      * @var LoggerInterface
      */
@@ -51,6 +50,7 @@ class InitiateSLO
         } catch (Error $e) {
             if ($e->getCode() === Error::SAML_SINGLE_LOGOUT_NOT_SUPPORTED) {
                 $this->log->error($e->getMessage());
+
                 return;
             }
 
