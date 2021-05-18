@@ -9,6 +9,7 @@ askvortsov-saml:
       only_option: Use SAML2 SSO as only login option?
       sync_attributes: Sync Attributes (Avatar, Groups, Bio, and Profile)? Requires askvortsov/auth-sync extension.
       nameid_format: NameID Format
+      slo: Enable SLO? If your IDP does not support this, this will do nothing.
       want_assertions_signed: Want Assertions Signed?
       want_messages_signed: Want Messages Signed?
     options:

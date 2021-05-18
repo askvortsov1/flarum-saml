@@ -47,6 +47,11 @@ app.initializers.add("askvortsov/saml", () => {
       type: "boolean",
     })
     .registerSetting({
+      setting: "askvortsov-saml.slo",
+      label: app.translator.trans("askvortsov-saml.admin.labels.slo"),
+      type: "boolean",
+    })
+    .registerSetting({
       setting: "askvortsov-saml.only_option",
       label: app.translator.trans("askvortsov-saml.admin.labels.only_option"),
       type: "boolean",
