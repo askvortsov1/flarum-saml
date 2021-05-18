@@ -17,6 +17,8 @@ askvortsov-saml:
       want_assertions_encrypted: Want Assertions Encrypted?
       want_assertions_signed: Want Assertions Signed?
       want_messages_signed: Want Messages Signed?
+      x509_cert: x509 Certificate (needed for signing, if enabled)
+      x509_key: x509 Private Key (needed for signing, if enabled)
     options:
       nameid_format:
         persistent: Persistent (Recommended if supported)
