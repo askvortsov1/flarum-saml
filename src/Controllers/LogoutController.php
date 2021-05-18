@@ -12,10 +12,15 @@
 namespace Askvortsov\FlarumSAML\Controllers;
 
 use Askvortsov\FlarumSAML\SAMLTrait;
+use Flarum\Http\Rememberer;
+use Flarum\Http\SessionAuthenticator;
+use Flarum\Http\UrlGenerator;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Arr;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
 use OneLogin\Saml2\Constants;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -24,6 +29,28 @@ use Psr\Http\Server\RequestHandlerInterface;
 class LogoutController implements RequestHandlerInterface
 {
     use SAMLTrait;
+
+    /**
+     * @var SessionAuthenticator
+     */
+    protected $authenticator;
+
+    /**
+     * @var Rememberer
+     */
+    protected $rememberer;
+
+    /**
+     * @var UrlGenerator
+     */
+    protected $url;
+
+    public function __construct(SessionAuthenticator $authenticator, Rememberer $rememberer, UrlGenerator $url)
+    {
+        $this->authenticator = $authenticator;
+        $this->rememberer = $rememberer;
+        $this->url = $url;
+    }
 
     public function handle(Request $request): Response
     {
@@ -58,10 +85,23 @@ class LogoutController implements RequestHandlerInterface
             throw new ModelNotFoundException();
         }
 
-        $user = User::where('email', $email)->first();
+        $session = $request->getAttribute('session');
+        $url = Arr::get($request->getQueryParams(), 'return', $this->url->to('forum')->base());
+        $response = new RedirectResponse($url);
 
-        $user->accessTokens()->delete();
+        $actor = User::where('email', $email)->first();
+        
+        if ($session) {
 
-        return new EmptyResponse();
+            $this->authenticator->logOut($session);
+
+            $actor->accessTokens()->delete();
+
+            return $this->rememberer->forget($response);
+        }
+
+        $actor->accessTokens()->delete();
+
+        return $response;
     }
 }

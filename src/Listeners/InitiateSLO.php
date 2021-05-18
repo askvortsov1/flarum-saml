@@ -40,13 +40,7 @@ class InitiateSLO
 
     public function handle(LoggedOut $event)
     {
-        try {
-            $auth = $this->auth(true);
-        } catch (\Exception $e) {
-            $this->log->error($e->getMessage());
-
-            return new HtmlResponse('Invalid SAML Configuration: Check Settings');
-        }
+        $auth = $this->auth(true);
 
         if (!$this->settings->get('askvortsov-saml.slo')) {
             return;
@@ -56,6 +50,7 @@ class InitiateSLO
             $auth->logout(null, [], $event->user->email);
         } catch (Error $e) {
             if ($e->getCode() === Error::SAML_SINGLE_LOGOUT_NOT_SUPPORTED) {
+                $this->log->error($e->getMessage());
                 return;
             }
 
