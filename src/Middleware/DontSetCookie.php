@@ -20,7 +20,9 @@ class DontSetCookie implements Middleware
     {
         $response = $handler->handle($request);
 
-        if ($request->getUri()->getPath() === '/auth/saml/acs' && $request->getMethod() === 'POST') {
+        $onAcs = $request->getUri()->getPath() === '/auth/saml/acs' && $request->getMethod() === 'POST';
+        $justLoggedIn = strpos($response->getHeaderLine('SET-COOKIE'), 'flarum_remember') !== false;
+        if ($onAcs && !$justLoggedIn) {
             return $response->withoutHeader('SET-COOKIE');
         } 
 
