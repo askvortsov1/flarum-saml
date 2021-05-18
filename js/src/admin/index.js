@@ -55,12 +55,12 @@ app.initializers.add("askvortsov/saml", () => {
       setting: "askvortsov-saml.only_option",
       label: app.translator.trans("askvortsov-saml.admin.labels.only_option"),
       type: "boolean",
-    })
-    .registerSetting({
-      setting: "askvortsov-saml.sync_attributes",
-      label: app.translator.trans(
-        "askvortsov-saml.admin.labels.sync_attributes"
-      ),
-      type: "boolean",
     });
+  // .registerSetting({
+  //   setting: "askvortsov-saml.sync_attributes",
+  //   label: app.translator.trans(
+  //     "askvortsov-saml.admin.labels.sync_attributes"
+  //   ),
+  //   type: "boolean",
+  // });
 });

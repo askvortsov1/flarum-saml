@@ -106,7 +106,7 @@ class ACSController implements RequestHandlerInterface
 
         $avatar = $saml->getAttribute('avatar')[0];
 
-        if ($this->extensions->isEnabled('askvortsov-auth-sync') && $this->settings->get('askvortsov-saml.sync_attributes', '')) {
+        if ($this->extensions->isEnabled('askvortsov-auth-sync') && $this->settings->get('askvortsov-saml.sync_attributes', false)) {
             $event = new AuthSyncEvent();
             $event->email = $email;
             $event->attributes = json_encode([
