@@ -99,11 +99,4 @@ app.initializers.add("askvortsov/saml", () => {
       label: app.translator.trans("askvortsov-saml.admin.labels.x509_cert"),
       type: "text",
     });
-  // .registerSetting({
-  //   setting: "askvortsov-saml.sync_attributes",
-  //   label: app.translator.trans(
-  //     "askvortsov-saml.admin.labels.sync_attributes"
-  //   ),
-  //   type: "boolean",
-  // });
 });

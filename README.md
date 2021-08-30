@@ -18,23 +18,6 @@ composer require askvortsov/flarum-saml
 composer update askvortsov/flarum-saml
 ```
 
-### Attribute Sync
-
-Flarum SAML integrates with [Flarum Auth Sync](https://github.com/askvortsov1/flarum-auth-sync), which lets you sync user avatars, bios, groups, and masquerade attributes via SAML Response Attributes. To this feature:
-
-- Enable it in settings
-- Make sure that [Flarum Auth Sync](https://github.com/askvortsov1/flarum-auth-sync) is enabled and configured properly
-- Make sure that [Friends of Flarum User Bios](https://github.com/FriendsOfFlarum/user-bio) and [Friends of Flarum Masquerade](https://github.com/FriendsOfFlarum/masquerade) are enabled if you'd like to use those integrations.
-
-Have your SAML Identity Provider include the following in attributes (make sure that keys are lowercase):
-
-- `avatar`: A URL pointing to an image for the user's avatar. Make sure that the file type is compatible with Flarum (jpeg or png I believe).
-- `groups`: A comma-separated list of ids for groups that a user should belong to. Keep in mind that this will both add and remove groups, so make sure that all desired groups are included.
-- `bio`: A string that will be synced to the user's bio if [Friends of Flarum User Bios](https://github.com/FriendsOfFlarum/user-bio) is enabled
-- For any masquerade attributes you want to sync, make sure that the SAML attribute key matches the name of the profile field.
-
-If one of these isn't included, or doesn't work, the rest should still work.
-
 ### TODO
 
 - Replace CSRF exemption workaround when Flarum Beta 12 is released.

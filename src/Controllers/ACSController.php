@@ -106,19 +106,6 @@ class ACSController implements RequestHandlerInterface
 
         $avatar = $saml->getAttribute('avatar')[0];
 
-        if ($this->extensions->isEnabled('askvortsov-auth-sync') && $this->settings->get('askvortsov-saml.sync_attributes', false)) {
-            $event = new AuthSyncEvent();
-            $event->email = $email;
-            $event->attributes = json_encode([
-                'avatar'                => $avatar,
-                'bio'                   => $saml->getAttribute('bio')[0],
-                'groups'                => explode(',', $saml->getAttribute('groups')[0]),
-                'masquerade_attributes' => $masquerade_attributes,
-            ]);
-            $event->time = Carbon::now();
-            $event->save();
-        }
-
         return $this->response->make(
             'saml-sso',
             $saml->getNameId(),
