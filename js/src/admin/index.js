@@ -33,6 +33,14 @@ app.initializers.add("askvortsov/saml", () => {
       },
     })
     .registerSetting({
+      setting: "askvortsov-saml.username_attribute",
+      label: app.translator.trans(
+        "askvortsov-saml.admin.labels.username_attribute"
+      ),
+      type: "text",
+      placeholder: "e.g. urn:oid:0.9.2342.19200300.100.1.1",
+    })
+    .registerSetting({
       setting: "askvortsov-saml.authn_requests_signed",
       label: app.translator.trans(
         "askvortsov-saml.admin.labels.authn_requests_signed"

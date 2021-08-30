@@ -11,13 +11,12 @@
 
 namespace Askvortsov\FlarumSAML\Controllers;
 
-use Askvortsov\FlarumAuthSync\Models\AuthSyncEvent;
 use Askvortsov\FlarumSAML\SAMLTrait;
-use Carbon\Carbon;
 use Flarum\Extension\ExtensionManager;
 use Flarum\Forum\Auth\Registration;
 use Flarum\Forum\Auth\ResponseFactory;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Illuminate\Support\Arr;
 use Laminas\Diactoros\Response\HtmlResponse;
 use OneLogin\Saml2\Constants;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -65,12 +64,12 @@ class ACSController implements RequestHandlerInterface
         } catch (\Exception $e) {
             resolve('log')->error($e->getMessage());
 
-            return new HtmlResponse('Could not process response: '.$e->getMessage());
+            return new HtmlResponse('Could not process response: ' . $e->getMessage());
         }
         if (!empty($saml->getErrors())) {
             $errors = implode(', ', $saml->getErrors());
 
-            return new HtmlResponse('Could not process response: '.$errors.': '.$saml->getLastErrorReason());
+            return new HtmlResponse('Could not process response: ' . $errors . ': ' . $saml->getLastErrorReason());
         }
         if (!$saml->isAuthenticated()) {
             return new HtmlResponse('Authentication Failed');
@@ -93,15 +92,11 @@ class ACSController implements RequestHandlerInterface
             }
         }
 
+        $uid_attr = $saml->getAttribute($this->settings->get('askvortsov-saml.username_attribute', ''))[0];
+        $uid = Arr::get($uid_attr, 0, '');
+
         if (!isset($email)) {
             return new HtmlResponse('Email not provided.');
-        }
-
-        $masquerade_attributes = [];
-        foreach ($attributes as $key => $attribute) {
-            if ($key != 'avatar' && $key != 'bio' && $key != 'groups') {
-                $masquerade_attributes[$key] = $attribute;
-            }
         }
 
         $avatar = $saml->getAttribute('avatar')[0];
@@ -109,11 +104,16 @@ class ACSController implements RequestHandlerInterface
         return $this->response->make(
             'saml-sso',
             $saml->getNameId(),
-            function (Registration $registration) use ($avatar, $email) {
+            function (Registration $registration) use ($avatar, $email, $uid) {
                 $registration
                     ->provideTrustedEmail($email)
-                    ->suggestUsername('')
+                    ->suggestUsername($uid)
                     ->setPayload([]);
+
+                if ($uid != "") {
+                    $registration
+                        ->provide('username', $uid);
+                }
 
                 if ($avatar) {
                     $registration->provideAvatar($avatar);
