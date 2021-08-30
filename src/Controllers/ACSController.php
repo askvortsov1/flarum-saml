@@ -92,7 +92,7 @@ class ACSController implements RequestHandlerInterface
             }
         }
 
-        $uid_attr = $saml->getAttribute($this->settings->get('askvortsov-saml.username_attribute', ''))[0];
+        $uid_attr = $saml->getAttribute($this->settings->get('askvortsov-saml.username_attribute', ''));
         $uid = Arr::get($uid_attr, 0, '');
 
         if (!isset($email)) {
