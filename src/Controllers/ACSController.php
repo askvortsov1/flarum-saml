@@ -64,12 +64,12 @@ class ACSController implements RequestHandlerInterface
         } catch (\Exception $e) {
             resolve('log')->error($e->getMessage());
 
-            return new HtmlResponse('Could not process response: ' . $e->getMessage());
+            return new HtmlResponse('Could not process response: '.$e->getMessage());
         }
         if (!empty($saml->getErrors())) {
             $errors = implode(', ', $saml->getErrors());
 
-            return new HtmlResponse('Could not process response: ' . $errors . ': ' . $saml->getLastErrorReason());
+            return new HtmlResponse('Could not process response: '.$errors.': '.$saml->getLastErrorReason());
         }
         if (!$saml->isAuthenticated()) {
             return new HtmlResponse('Authentication Failed');
@@ -110,7 +110,7 @@ class ACSController implements RequestHandlerInterface
                     ->suggestUsername($uid)
                     ->setPayload([]);
 
-                if ($uid != "") {
+                if ($uid != '') {
                     $registration
                         ->provide('username', $uid);
                 }
